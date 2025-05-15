@@ -1,0 +1,20 @@
+{
+  "name": "insyd-notification-system-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon producer/server.js",
+    "start": "node producer/server.js",
+    "start:consumer": "node consumer/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.10.8",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
+  }
+}
