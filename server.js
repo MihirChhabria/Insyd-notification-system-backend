@@ -1,16 +1,16 @@
-import 'dotenv/config'; // Load env variables first
+import 'dotenv/config'; 
 
 import http from 'http';
 import express from 'express';
 import { setupWebSocket } from './websockets/wsServer.js';
 import { connectRedis } from './consumer/config/redisConfig.js';
-
+import { connectRabbitMQ } from './producer/services/mqService.js';
 async function startServer() {
-  // Log env to verify
+  
   console.log('REDIS_URL:', process.env.REDIS_URL);
 
-  await connectRedis();  // Connect Redis before using it
-
+  await connectRedis();  
+  await connectRabbitMQ();
   const app = express();
   const server = http.createServer(app);
     
