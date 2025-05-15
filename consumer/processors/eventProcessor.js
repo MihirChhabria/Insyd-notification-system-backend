@@ -3,13 +3,14 @@ import { isDuplicate } from '../services/deduplicationService.js';
 import { isThrottled } from '../services/rateLimiterService.js';
 import { getPriority } from '../services/priorityService.js';
 import { formatNotification } from '../services/notificationFormatter.js';
+import { addNotificationToBuffer } from '../services/redisNotificationBuffer.js';
 
 async function processEvent(event) {
   try {
     // 1. Validate event schema
     eventSchema.parse(event);
 
-    const { actorId, type } = event;
+    const { actorId, targetId, type } = event;
 
     // 2. Deduplication check
     const duplicate = await isDuplicate(event);
@@ -33,8 +34,9 @@ async function processEvent(event) {
     const formattedMessage = await formatNotification(event);
     console.log(`📨 Formatted notification: ${JSON.stringify(formattedMessage)}`);
 
-
+    await addNotificationToBuffer(targetId, formattedMessage);
     console.log(`✅ Processing event: ${type} by user ${actorId}`);
+
 
     return { status: 'processed', priority, message: formattedMessage  };
 
