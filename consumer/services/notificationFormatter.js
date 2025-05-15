@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { User } from '../../models/userModel.js';
 import { Post } from '../../models/postModel.js';
 
-export async function formatNotification(event) {
+async function formatNotification(event) {
   const { type, actorId, targetId, postId } = event;
 
   if (!mongoose.Types.ObjectId.isValid(actorId) || !mongoose.Types.ObjectId.isValid(targetId)) {
@@ -44,4 +44,8 @@ export async function formatNotification(event) {
     eventType: type,
     timestamp: new Date(),
   };
+}
+
+export {
+    formatNotification
 }

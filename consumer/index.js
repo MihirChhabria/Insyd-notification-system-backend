@@ -1,7 +1,7 @@
 import connectDB from '../config/db.js';
 import 'dotenv/config';
 import { connectAndConsume } from './services/mqConsumerService.js';
-import { connectRedis } from './config/redisConfig.js';
+import { connectRedis } from '../consumer/config/redisConfig.js';
 
 async function startConsumer() {
   try {

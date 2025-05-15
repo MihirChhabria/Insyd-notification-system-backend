@@ -4,7 +4,7 @@ const RATE_LIMIT_PREFIX = 'rate_limit:';
 const MAX_EVENTS = 2;
 const WINDOW_SECONDS = 10;
 
-export async function isThrottled(userId) {
+async function isThrottled(userId) {
   const key = `${RATE_LIMIT_PREFIX}${userId}`;
 
   const pipeline = redisClient.multi();
@@ -25,4 +25,8 @@ export async function isThrottled(userId) {
 
   console.log(`⏳ Rate check passed: ${currentCount}/${MAX_EVENTS} in window`);
   return false;
+}
+
+export {
+    isThrottled
 }

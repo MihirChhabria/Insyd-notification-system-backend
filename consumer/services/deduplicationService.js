@@ -3,7 +3,7 @@ import { redisClient } from '../config/redisConfig.js';
 const DEDUP_KEY = 'notification:dedup';
 const DEDUP_TTL_SECONDS = 300; 
 
-export async function isDuplicate(event) {
+async function isDuplicate(event) {
   const eventSignature = `${event.type}:${event.actorId}:${event.targetId}:${event.postId}`;
 
   const now = Date.now();
@@ -25,4 +25,8 @@ export async function isDuplicate(event) {
   });
 
   return false;
+}
+
+export {
+    isDuplicate
 }

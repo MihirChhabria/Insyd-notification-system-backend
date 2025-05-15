@@ -8,7 +8,9 @@
     "dev": "nodemon producer/server.js",
     "start": "node producer/server.js",
     "dev:consumer": "nodemon consumer/index.js",
-    "start:consumer": "node consumer/index.js"
+    "start:consumer": "node consumer/index.js",
+    "dev:ws": "nodemon server.js",
+    "start:ws": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,8 @@
     "express": "^5.1.0",
     "mongoose": "^8.14.3",
     "redis": "^5.0.1",
+    "uuid": "^11.1.0",
+    "ws": "^8.18.2",
     "zod": "^3.24.4"
   }
 }

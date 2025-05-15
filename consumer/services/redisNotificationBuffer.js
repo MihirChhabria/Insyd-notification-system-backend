@@ -1,14 +1,16 @@
 import { redisClient } from '../config/redisConfig.js';
+import { v4 as uuidv4 } from 'uuid';
 
 const NOTIF_BUFFER_PREFIX = 'notifications:buffer:';
 const NOTIF_TTL_SECONDS = 3600; 
 
-export async function addNotificationToBuffer(userId, notification) {
+async function addNotificationToBuffer(userId, notification) {
   const key = `${NOTIF_BUFFER_PREFIX}${userId}`;
 
   // Add status = 'pending' before storing
   const enrichedNotification = {
     ...notification,
+    notificationId: uuidv4(),
     status: 'pending'
   };
 
@@ -20,4 +22,8 @@ export async function addNotificationToBuffer(userId, notification) {
   }
 
   console.log(`[RedisBuffer] Added pending notification for user ${userId}, key: ${key}`);
+}
+
+export {
+    addNotificationToBuffer
 }
