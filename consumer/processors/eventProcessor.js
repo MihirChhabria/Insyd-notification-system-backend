@@ -2,6 +2,7 @@ import { eventSchema } from '../validators/eventSchema.js';
 import { isDuplicate } from '../services/deduplicationService.js';
 import { isThrottled } from '../services/rateLimiterService.js';
 import { getPriority } from '../services/priorityService.js';
+import { formatNotification } from '../services/notificationFormatter.js';
 
 async function processEvent(event) {
   try {
@@ -29,10 +30,13 @@ async function processEvent(event) {
     console.log(`✅ Event priority: ${priority}`);
 
     // 5. Proceed with forwarding event for formatting/dispatching
-    // For now, just simulate processing
+    const formattedMessage = await formatNotification(event);
+    console.log(`📨 Formatted notification: ${JSON.stringify(formattedMessage)}`);
+
+
     console.log(`✅ Processing event: ${type} by user ${actorId}`);
 
-    return { status: 'processed', priority };
+    return { status: 'processed', priority, message: formattedMessage  };
 
   } catch (err) {
     console.error('❌ Event processing failed:', err.message || err);
