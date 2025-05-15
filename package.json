@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "nodemon producer/server.js",
     "start": "node producer/server.js",
+    "dev:consumer": "nodemon consumer/index.js",
     "start:consumer": "node consumer/index.js"
   },
   "keywords": [],
