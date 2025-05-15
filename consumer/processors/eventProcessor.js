@@ -1,4 +1,3 @@
-// consumer/services/eventProcessor.js
 import { eventSchema } from '../validators/eventSchema.js';
 import { isDuplicate } from '../services/deduplicationService.js';
 import { isThrottled } from '../services/rateLimiterService.js';
